@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { docsNav, siteConfig } from "@/lib/site";
+import { authorConfig, docsNav, siteConfig } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -95,7 +95,11 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {new Date().getFullYear()} {siteConfig.author}. Released under the {siteConfig.license} license.
+            &copy; {new Date().getFullYear()}{" "}
+            <a href={authorConfig.links[0].href} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
+              {siteConfig.author}
+            </a>
+            . Released under the {siteConfig.license} license.
           </p>
           <p>Aktilot is open source and not affiliated with OpenAI, Temporal Technologies, or Chroma.</p>
         </div>

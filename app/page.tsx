@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container, FeatureCard } from "@/components/ui";
 import { CodeBlock } from "@/components/CodeBlock";
+import { AuthorSection } from "@/components/AuthorSection";
 import { siteConfig } from "@/lib/site";
 
 const quickStart = `git clone ${siteConfig.githubUrl}.git
@@ -217,6 +218,8 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      <AuthorSection />
 
       {/* Quick start */}
       <section className="py-20">
