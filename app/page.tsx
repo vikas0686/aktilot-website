@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Container, FeatureCard } from "@/components/ui";
 import { CodeBlock } from "@/components/CodeBlock";
 import { AuthorSection } from "@/components/AuthorSection";
+import { BrowserFrame } from "@/components/BrowserFrame";
+import { IconActivity, IconBot, IconCheck, IconEye, IconFolder, IconServer, IconShield, IconUpload, IconX } from "@/components/icons";
 import { siteConfig } from "@/lib/site";
 
 const quickStart = `git clone ${siteConfig.githubUrl}.git
@@ -13,39 +15,53 @@ cp .env.example .env
 
 docker compose up --build`;
 
+const stats = ["MIT Licensed", "Self-Hosted", "Docker Compose", "Powered by Temporal"];
+
 const features = [
   {
     title: "Projects isolate your knowledge",
     body: "Group documents by team, client, or use case. Each project gets its own isolated vector store, so a query against your legal documents never bleeds into your engineering runbooks.",
+    icon: IconFolder,
   },
   {
     title: "Agents that know their role",
     body: "Each agent has a configurable system prompt, persona, and retrieval depth (top_k). Your customer-facing support bot and internal audit agent can live in the same project and behave completely differently.",
+    icon: IconBot,
   },
   {
     title: "Upload PDF, Word, or plain text",
     body: "Drop in a file and Aktilot handles the rest: splitting it into overlapping chunks, embedding each one via OpenAI, and indexing it into ChromaDB — with live processing status in the UI.",
+    icon: IconUpload,
   },
   {
     title: "Answers with sources, always",
     body: "Every response includes the exact document chunks it was built from — filename, chunk position, and relevance score. No hallucination hiding behind a confident tone.",
+    icon: IconEye,
   },
   {
     title: "Full pipeline transparency",
     body: "The UI exposes the full retrieval trace for each query: extracted keywords, vector search candidates, reranking, assembled context, and per-step timing. Nothing is a black box.",
+    icon: IconActivity,
   },
   {
     title: "Resilient by design",
     body: "Ingestion and chat both run as durable Temporal workflows. Every activity is checkpointed — if OpenAI rate-limits you mid-pipeline, only the failed step retries, and no API credits are wasted.",
+    icon: IconShield,
   },
   {
     title: "Runs on your infrastructure",
     body: "Postgres, ChromaDB, and the worker all run in Docker. Your documents never leave your network. You control the OpenAI key, the storage, and the retention policy.",
+    icon: IconServer,
   },
-  {
-    title: "Observability out of the box",
-    body: "Metrics, traces, and 7 pre-built Grafana dashboards covering LLM performance, retrieval quality, token costs, prompt intelligence, vector DB health, and Temporal workflow execution.",
-  },
+];
+
+const comparison = [
+  { label: "Your data stays on your infra", hosted: false, diy: true, aktilot: true },
+  { label: "Running in minutes, not weeks", hosted: true, diy: false, aktilot: true },
+  { label: "Hybrid BM25 + vector retrieval", hosted: false, diy: false, aktilot: true },
+  { label: "Full per-query pipeline trace", hosted: false, diy: false, aktilot: true },
+  { label: "Durable, auto-retrying workflows", hosted: false, diy: false, aktilot: true },
+  { label: "No per-seat or per-query fees", hosted: false, diy: true, aktilot: true },
 ];
 
 export default function Home() {
@@ -92,6 +108,14 @@ export default function Home() {
                   View on GitHub
                 </a>
               </div>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+                {stats.map((s) => (
+                  <span key={s} className="flex items-center gap-1.5 text-xs font-medium text-muted">
+                    <IconCheck className="h-3.5 w-3.5 text-emerald-500" />
+                    {s}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className="relative mx-auto w-full max-w-md lg:max-w-none">
               <Image
@@ -108,21 +132,61 @@ export default function Home() {
       </section>
 
       {/* Problem / Solution */}
-      <section className="border-b border-border py-20">
+      <section className="border-b border-border bg-surface py-20">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">The problem with document AI today</h2>
             <p className="mt-4 text-muted">
               Your team has documents everywhere — contracts, reports, runbooks, research papers — and finding
               answers means either manually digging through files or paying for a hosted AI service that
-              ingests your sensitive data. Hosted document AI tools are expensive, opaque, and require you to
-              hand over your files to a third party. Building your own RAG pipeline from scratch means weeks of
+              ingests your sensitive data. Building your own RAG pipeline from scratch means weeks of
               engineering work just to get a working prototype.
             </p>
             <p className="mt-4 font-medium">
               Aktilot fills that gap — a self-hosted platform that lets you ask questions in plain English, in
               minutes not weeks, with your data staying exactly where it is.
             </p>
+          </div>
+
+          <div className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-xl border border-border bg-background">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="px-4 py-3 font-semibold text-muted"> </th>
+                  <th className="px-4 py-3 font-semibold text-muted">Hosted SaaS</th>
+                  <th className="px-4 py-3 font-semibold text-muted">DIY pipeline</th>
+                  <th className="px-4 py-3 font-semibold text-brand-violet">Aktilot</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparison.map((row) => (
+                  <tr key={row.label} className="border-b border-border last:border-0">
+                    <td className="px-4 py-3 text-foreground">{row.label}</td>
+                    <td className="px-4 py-3">
+                      {row.hosted ? (
+                        <IconCheck className="h-4 w-4 text-emerald-500" />
+                      ) : (
+                        <IconX className="h-4 w-4 text-muted/50" />
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      {row.diy ? (
+                        <IconCheck className="h-4 w-4 text-emerald-500" />
+                      ) : (
+                        <IconX className="h-4 w-4 text-muted/50" />
+                      )}
+                    </td>
+                    <td className="bg-brand-violet/5 px-4 py-3">
+                      {row.aktilot ? (
+                        <IconCheck className="h-4 w-4 text-brand-violet" />
+                      ) : (
+                        <IconX className="h-4 w-4 text-muted/50" />
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </Container>
       </section>
@@ -138,7 +202,7 @@ export default function Home() {
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
-              <FeatureCard key={f.title} title={f.title}>
+              <FeatureCard key={f.title} title={f.title} icon={<f.icon className="h-5 w-5" />}>
                 {f.body}
               </FeatureCard>
             ))}
@@ -152,7 +216,7 @@ export default function Home() {
       </section>
 
       {/* Architecture */}
-      <section className="border-b border-border py-20">
+      <section className="border-b border-border bg-surface py-20">
         <Container>
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
@@ -185,7 +249,7 @@ export default function Home() {
                 Read the architecture deep dive &rarr;
               </Link>
             </div>
-            <div className="overflow-hidden rounded-xl border border-border">
+            <div className="overflow-hidden rounded-xl border border-border bg-background">
               <Image
                 src="/architecture-diagram.png"
                 alt="Aktilot architecture diagram: Temporal cluster orchestrating DocumentWorkflow, ChatWorkflow, and BenchmarkWorkflow across Postgres, ChromaDB, and an evaluation DB"
@@ -202,18 +266,19 @@ export default function Home() {
       <section className="border-b border-border py-20">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">See exactly where every answer comes from</h2>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Nothing hides behind a spinner</h2>
             <p className="mt-4 text-muted">
-              Every chat response is grounded in your uploaded documents and shows its receipts.
+              Every ingestion and chat request is a Temporal workflow you can inspect step by step — retries,
+              timing, and failures included.
             </p>
           </div>
-          <div className="mt-10 overflow-hidden rounded-xl border border-border shadow-xl">
-            <Image
-              src="/screenshots/chat.png"
-              alt="Aktilot chat interface showing a grounded answer with cited source chunks"
+          <div className="mt-10">
+            <BrowserFrame
+              src="/screenshots/temporal-chat-workflow.png"
+              alt="Temporal UI showing the full ChatWorkflow activity trace: keyword extraction, embedding, vector search, hybrid ranking, and answer generation"
               width={1600}
               height={900}
-              className="w-full"
+              url="localhost:8233 — Temporal UI"
             />
           </div>
         </Container>
@@ -222,7 +287,7 @@ export default function Home() {
       <AuthorSection />
 
       {/* Quick start */}
-      <section className="py-20">
+      <section className="bg-surface py-20">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Running in minutes</h2>

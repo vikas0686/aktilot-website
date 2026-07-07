@@ -41,9 +41,10 @@ export const authorConfig = {
 
 export const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/docs", label: "Docs" },
+  { href: "/demo", label: "Demo" },
   { href: "/docs/architecture", label: "Architecture" },
   { href: "/docs/observability", label: "Observability" },
+  { href: "/docs/api", label: "API Reference" },
   { href: "/blog", label: "Blog" },
 ] as const;
 
