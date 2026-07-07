@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# aktilot.com
 
-## Getting Started
+The marketing and documentation website for [Aktilot](https://github.com/vikas0686/Aktilot) — a
+self-hosted, open-source RAG platform for chatting with your documents.
 
-First, run the development server:
+Built with Next.js (App Router) and Tailwind CSS, statically exported and deployed to Cloudflare Pages.
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Building
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+This produces a fully static site in `out/` (via `output: "export"` in `next.config.ts`). There is no
+Node.js server involved — the site is plain HTML/CSS/JS and can be hosted on any static host.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploying to Cloudflare Pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Option A — Git integration (recommended):**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push this repo to GitHub.
+2. In the Cloudflare dashboard, go to **Workers & Pages → Create → Pages → Connect to Git** and select
+   the repo.
+3. Build settings:
+   - Framework preset: `Next.js (Static HTML Export)`
+   - Build command: `npm run build`
+   - Build output directory: `out`
+4. Add a custom domain (`aktilot.com`) under the Pages project's **Custom domains** tab.
 
-## Deploy on Vercel
+**Option B — CLI deploy:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npx wrangler pages deploy out --project-name=aktilot-website
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Notes
+
+- `next.config.ts` sets `output: "export"` and `trailingSlash: true` so every route emits a
+  `<route>/index.html`, which is what static hosts (including Cloudflare Pages) expect for clean URLs.
+- `public/_headers` configures security headers and long-lived caching for static assets, using
+  [Cloudflare Pages' `_headers` convention](https://developers.cloudflare.com/pages/configuration/headers/).
+- Update `lib/site.ts` if the canonical domain, GitHub repo URL, or metadata ever change — `sitemap.ts`,
+  `robots.ts`, `manifest.ts`, and every page's Open Graph tags all read from that one file.
