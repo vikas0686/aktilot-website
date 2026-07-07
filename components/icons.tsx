@@ -11,6 +11,14 @@ const base = {
   strokeLinejoin: "round" as const,
 };
 
+export function IconChevronDown(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export function IconPlay(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>

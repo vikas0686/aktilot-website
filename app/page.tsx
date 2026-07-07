@@ -4,7 +4,7 @@ import { Container, FeatureCard } from "@/components/ui";
 import { CodeBlock } from "@/components/CodeBlock";
 import { AuthorSection } from "@/components/AuthorSection";
 import { BrowserFrame } from "@/components/BrowserFrame";
-import { IconActivity, IconBot, IconCheck, IconEye, IconFolder, IconServer, IconShield, IconUpload, IconX } from "@/components/icons";
+import { IconActivity, IconBot, IconCheck, IconChevronDown, IconEye, IconFolder, IconServer, IconShield, IconUpload, IconX } from "@/components/icons";
 import { siteConfig } from "@/lib/site";
 
 const quickStart = `git clone ${siteConfig.githubUrl}.git
@@ -68,67 +68,55 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
+      <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden border-b border-border">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07] dark:opacity-[0.12]"
+          className="pointer-events-none absolute inset-0 opacity-[0.05] dark:opacity-[0.08]"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 20% 20%, #7c3aed, transparent 40%), radial-gradient(circle at 80% 0%, #4338ca, transparent 40%)",
+              "radial-gradient(circle at 20% 20%, #18181b, transparent 40%), radial-gradient(circle at 80% 0%, #18181b, transparent 40%)",
           }}
         />
-        <Container className="relative py-20 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                MIT licensed &middot; actively developed
-              </div>
-              <h1 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-                Chat with your documents.
-                <br />
-                <span className="brand-gradient-text">On your infrastructure.</span>
-              </h1>
-              <p className="mt-5 max-w-xl text-lg text-muted">
-                Aktilot is a self-hosted, open-source RAG platform. Upload your documents, ask questions in
-                plain English, and get cited answers — with no data ever leaving your servers.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/docs"
-                  className="brand-gradient flex h-11 items-center rounded-md px-5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                >
-                  Get Started
-                </Link>
-                <a
-                  href={siteConfig.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-11 items-center rounded-md border border-border px-5 text-sm font-semibold transition-colors hover:bg-surface"
-                >
-                  View on GitHub
-                </a>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-                {stats.map((s) => (
-                  <span key={s} className="flex items-center gap-1.5 text-xs font-medium text-muted">
-                    <IconCheck className="h-3.5 w-3.5 text-emerald-500" />
-                    {s}
-                  </span>
-                ))}
-              </div>
+        <Container className="relative py-20">
+          <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              MIT licensed &middot; actively developed
             </div>
-            <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-              <Image
-                src="/hero.png"
-                alt="Aktilot abstract brand graphic"
-                width={480}
-                height={480}
-                priority
-                className="w-full drop-shadow-2xl"
-              />
+            <h1 className="mt-8 text-4xl font-bold tracking-tight sm:text-5xl">
+              Build AI Agents that understands your documents.
+            </h1>
+            <p className="mt-5 max-w-xl text-lg text-muted">
+              Aktilot is an open-source platform for document intelligence, combining workflow orchestration, hybrid retrieval, and conversational AI into a production-ready developer experience.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/docs"
+                className="brand-gradient flex h-11 items-center rounded-md px-5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              >
+                Get Started
+              </Link>
+              <a
+                href={siteConfig.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-11 items-center rounded-md border border-border px-5 text-sm font-semibold transition-colors hover:bg-surface"
+              >
+                View on GitHub
+              </a>
+            </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
+              {stats.map((s) => (
+                <span key={s} className="flex items-center gap-1.5 text-xs font-medium text-violet-600 dark:text-violet-400">
+                  <IconCheck className="h-3.5 w-3.5 text-violet-600 dark:text-violet-400" />
+                  {s}
+                </span>
+              ))}
             </div>
           </div>
         </Container>
+        <div className="absolute inset-x-0 bottom-8 flex justify-center">
+          <IconChevronDown className="h-5 w-5 animate-bounce text-muted/40" />
+        </div>
       </section>
 
       {/* Problem / Solution */}
@@ -164,14 +152,14 @@ export default function Home() {
                     <td className="px-4 py-3 text-foreground">{row.label}</td>
                     <td className="px-4 py-3">
                       {row.hosted ? (
-                        <IconCheck className="h-4 w-4 text-emerald-500" />
+                        <IconCheck className="h-4 w-4 text-foreground" />
                       ) : (
                         <IconX className="h-4 w-4 text-muted/50" />
                       )}
                     </td>
                     <td className="px-4 py-3">
                       {row.diy ? (
-                        <IconCheck className="h-4 w-4 text-emerald-500" />
+                        <IconCheck className="h-4 w-4 text-foreground" />
                       ) : (
                         <IconX className="h-4 w-4 text-muted/50" />
                       )}

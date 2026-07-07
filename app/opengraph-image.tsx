@@ -16,7 +16,7 @@ export default function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          backgroundImage: "linear-gradient(135deg, #171123, #0a0a0c)",
+          backgroundColor: "#0a0a0c",
           color: "white",
           fontFamily: "sans-serif",
         }}
@@ -27,7 +27,7 @@ export default function Image() {
             width: 96,
             height: 96,
             borderRadius: 24,
-            backgroundImage: "linear-gradient(135deg, #7c3aed, #4338ca)",
+            backgroundColor: "#fafafa",
             marginBottom: 48,
           }}
         />
@@ -42,7 +42,7 @@ export default function Image() {
             display: "flex",
             marginTop: 56,
             fontSize: 24,
-            color: "#e879f9",
+            color: "#a1a1aa",
             fontWeight: 600,
           }}
         >

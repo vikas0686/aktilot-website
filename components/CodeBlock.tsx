@@ -36,7 +36,7 @@ export function CodeBlock({ code, label }: { code: string; label?: string }) {
         >
           {copied ? (
             <>
-              <IconCheck className="h-3.5 w-3.5 text-emerald-500" />
+              <IconCheck className="h-3.5 w-3.5 text-zinc-100" />
               Copied
             </>
           ) : (

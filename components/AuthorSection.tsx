@@ -31,7 +31,7 @@ export function AuthorSection() {
                     rel="noopener noreferrer"
                     className="text-sm font-medium text-brand-violet hover:underline"
                   >
-                    {link.label} &rarr;
+                    {link.label} |
                   </a>
                 ))}
               </div>

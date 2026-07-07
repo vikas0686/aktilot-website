@@ -123,7 +123,7 @@ export default function ObservabilityPage() {
             <h3 className="font-semibold">
               {i + 1}. {d.name}
             </h3>
-            <p className="mt-1 font-mono text-xs text-brand-violet">{d.path}</p>
+            <p className="mt-1 font-mono text-xs text-violet-600 dark:text-violet-400">{d.path}</p>
             <p className="mt-2 text-sm text-muted">{d.desc}</p>
           </div>
         ))}

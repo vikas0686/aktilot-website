@@ -8,9 +8,9 @@
   --muted: #71717a;
   --border: #e4e4e7;
   --surface: #fafafa;
-  --brand-violet: #7c3aed;
-  --brand-indigo: #4338ca;
-  --brand-fuchsia: #e879f9;
+  --brand-violet: #18181b;
+  --brand-indigo: #3f3f46;
+  --brand-fuchsia: #52525b;
 }
 
 .dark {
@@ -19,6 +19,9 @@
   --muted: #a1a1aa;
   --border: #27272a;
   --surface: #131316;
+  --brand-violet: #f4f4f5;
+  --brand-indigo: #d4d4d8;
+  --brand-fuchsia: #a1a1aa;
 }
 
 @theme inline {
@@ -40,17 +43,15 @@ body {
 }
 
 .brand-gradient {
-  background-image: linear-gradient(135deg, var(--brand-violet), var(--brand-indigo));
+  background-color: #18181b;
+  color: #fafafa;
 }
 
 .brand-gradient-text {
-  background-image: linear-gradient(135deg, var(--brand-violet), var(--brand-indigo));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: inherit;
 }
 
 ::selection {
-  background: var(--brand-violet);
-  color: white;
+  background: var(--foreground);
+  color: var(--background);
 }
