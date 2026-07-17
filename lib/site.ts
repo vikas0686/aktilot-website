@@ -26,18 +26,39 @@ export const siteConfig = {
   ],
 } as const;
 
-export const authorConfig = {
-  name: "Vikas Pandey",
-  role: "Principle Engineer",
-  photo: "/vikas-pandey.jpg",
-  bio: "Aktilot is built and maintained by Vikas Pandey, a software engineer and payments architect with 17+ years building infrastructure that moves money reliably at scale — UPI, card processing, and distributed systems that can't afford to be wrong. Aktilot applies that same discipline to RAG: durable, checkpointed workflows instead of fire-and-forget scripts, and full observability instead of a black box.",
-  links: [
-    { label: "Personal site", href: "https://vikaspandey.dev" },
-    { label: "GitHub", href: "https://github.com/vikas0686" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/vikas-pandey-76904817/" },
-    { label: "Medium", href: "https://medium.com/@vikas.pandey4" },
-  ],
-} as const;
+export type TeamMember = {
+  name: string;
+  role: string;
+  photo: string;
+  bio: string;
+  links: readonly { label: string; href: string }[];
+};
+
+export const teamMembers: readonly TeamMember[] = [
+  {
+    name: "Vikas Pandey",
+    role: "Principle Engineer",
+    photo: "/team/vikas-pandey.jpg",
+    bio: "Aktilot is built and maintained by Vikas Pandey, a software engineer and payments architect with 17+ years building infrastructure that moves money reliably at scale — UPI, card processing, and distributed systems that can't afford to be wrong. Aktilot applies that same discipline to RAG: durable, checkpointed workflows instead of fire-and-forget scripts, and full observability instead of a black box.",
+    links: [
+      { label: "Personal site", href: "https://vikaspandey.dev" },
+      { label: "GitHub", href: "https://github.com/vikas0686" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/vikas-pandey-76904817/" },
+      { label: "Medium", href: "https://medium.com/@vikas.pandey4" },
+    ],
+  },
+  {
+    name: "Kush Saraiya",
+    role: "Principal Consultant",
+    photo: "/team/kush.jpeg",
+    bio: "Kush brings 17+ years of engineering judgement to Aktilot — from distributed systems and platform modernisation to the kind of architectural decisions that look simple on a whiteboard and expensive in production. His focus on observability, durable workflows, and systems that don't hide their failures shapes how Aktilot is designed from the ground up.",
+    links: [
+      { label: "Personal site", href: "https://kushsaraiya.com" },
+      { label: "GitHub", href: "https://github.com/saraiyakush" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/kushsaraiya/" },
+    ],
+  },
+] as const;
 
 export const navLinks = [
   { href: "/", label: "Home" },
