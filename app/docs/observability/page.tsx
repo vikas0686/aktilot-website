@@ -67,7 +67,7 @@ const metricPrefixes = [
 
 export default function ObservabilityPage() {
   return (
-    <article className="prose-content max-w-none">
+    <article className="prose-content mx-auto max-w-3xl">
       <h1 className="text-3xl font-bold tracking-tight">Observability</h1>
       <p className="mt-3 text-muted">
         Aktilot ships with a full observability stack out of the box. Every component of the RAG pipeline —

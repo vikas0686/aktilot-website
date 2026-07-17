@@ -18,7 +18,7 @@ export function AuthorSection() {
                 className="rounded-xl border border-border bg-surface p-6 transition-colors hover:border-brand-violet/40"
               >
                 <div className="flex items-center gap-4">
-                  <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-border">
+                  <div className="h-25 w-25 overflow-hidden rounded-full border border-border">
                     <Image
                       src={member.photo}
                       alt={member.name}

@@ -65,7 +65,7 @@ const envVars = [
 
 export default function GettingStartedPage() {
   return (
-    <article className="prose-content max-w-none">
+    <article className="prose-content mx-auto max-w-3xl">
       <h1 className="text-3xl font-bold tracking-tight">Getting Started</h1>
       <p className="mt-3 text-muted">
         The fastest way to run Aktilot is with Docker Compose. You need an{" "}
