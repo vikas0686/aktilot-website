@@ -97,7 +97,7 @@ export function Footer() {
           <p>
             &copy; {new Date().getFullYear()}{" "}
             <a href={siteConfig.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
-              Aktilot Contributors
+              Vikas Pandey
             </a>
             . Released under the {siteConfig.license} license.
           </p>

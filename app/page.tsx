@@ -272,8 +272,6 @@ export default function Home() {
         </Container>
       </section>
 
-      <AuthorSection />
-
       {/* Quick start */}
       <section className="bg-surface py-20">
         <Container>
@@ -296,6 +294,8 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      <AuthorSection />
     </>
   );
 }
