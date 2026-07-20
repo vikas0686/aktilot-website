@@ -78,7 +78,7 @@ export default function ArchitecturePage() {
           <h3 className="font-semibold text-brand-violet">ChatWorkflow</h3>
           <p className="mt-2 text-sm text-muted">
             Hybrid BM25 + vector retrieval, LLM answer generation, and conversation persistence. Each step is
-            checkpointed; a failed OpenAI call retries alone without re-running earlier steps.
+            checkpointed; a failed LLM call retries alone without re-running earlier steps.
           </p>
           <p className="mt-3 text-xs text-muted">
             Activities observed in a real trace:{" "}
@@ -102,8 +102,8 @@ export default function ArchitecturePage() {
       <h2 className="mt-12 text-xl font-bold tracking-tight">Retrieval pipeline</h2>
       <p className="mt-3 text-muted">
         Ingestion parses PDF (pypdf/pdfplumber), DOCX (python-docx), or plain text, cleans it, splits it into
-        overlapping chunks (~1000 characters with ~200 character overlap), embeds each chunk with{" "}
-        <code className="rounded bg-surface px-1.5 py-0.5">text-embedding-3-small</code> (1536 dimensions),
+        overlapping chunks (~1000 characters with ~200 character overlap), embeds each chunk with
+        your configured embedding model,
         and writes it into ChromaDB.
       </p>
       <p className="mt-3 text-muted">

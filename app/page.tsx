@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container, FeatureCard } from "@/components/ui";
-import { CodeBlock } from "@/components/CodeBlock";
+import { ProviderTabs } from "@/components/ProviderTabs";
 import { AuthorSection } from "@/components/AuthorSection";
 import { BrowserFrame } from "@/components/BrowserFrame";
 import { IconActivity, IconBot, IconCheck, IconChevronDown, IconEye, IconFolder, IconServer, IconShield, IconUpload, IconX } from "@/components/icons";
 import { siteConfig } from "@/lib/site";
 
-const quickStart = `git clone ${siteConfig.githubUrl}.git
+const quickStartOpenAI = `git clone ${siteConfig.githubUrl}.git
 cd Aktilot
 
 cp .env.example .env
@@ -15,7 +15,18 @@ cp .env.example .env
 
 docker compose up --build`;
 
-const stats = ["MIT Licensed", "Self-Hosted", "Docker Compose", "Powered by Temporal"];
+const quickStartOllama = `git clone ${siteConfig.githubUrl}.git
+cd Aktilot
+
+cp .env.example .env
+#   LLM_PROVIDER=ollama
+#   CHAT_MODEL=llama3.2
+#   EMBEDDING_PROVIDER=ollama
+#   EMBEDDING_MODEL=nomic-embed-text
+
+docker compose --profile ollama up --build`;
+
+const stats = ["MIT Licensed", "Self-Hosted", "Multi-LLM Provider", "Powered by Temporal"];
 
 const features = [
   {
@@ -30,7 +41,7 @@ const features = [
   },
   {
     title: "Upload PDF, Word, or plain text",
-    body: "Drop in a file and Aktilot handles the rest: splitting it into overlapping chunks, embedding each one via OpenAI, and indexing it into ChromaDB — with live processing status in the UI.",
+    body: "Drop in a file and Aktilot handles the rest: splitting it into overlapping chunks, embedding each one, and indexing it into ChromaDB — with live processing status in the UI.",
     icon: IconUpload,
   },
   {
@@ -45,12 +56,12 @@ const features = [
   },
   {
     title: "Resilient by design",
-    body: "Ingestion and chat both run as durable Temporal workflows. Every activity is checkpointed — if OpenAI rate-limits you mid-pipeline, only the failed step retries, and no API credits are wasted.",
+    body: "Ingestion and chat both run as durable Temporal workflows. Every activity is checkpointed — if your LLM provider rate-limits you mid-pipeline, only the failed step retries, and no API credits are wasted.",
     icon: IconShield,
   },
   {
     title: "Runs on your infrastructure",
-    body: "Postgres, ChromaDB, and the worker all run in Docker. Your documents never leave your network. You control the OpenAI key, the storage, and the retention policy.",
+    body: "Postgres, ChromaDB, and the worker all run in Docker. Bring your own LLM provider or run models locally — your documents never leave your network.",
     icon: IconServer,
   },
 ];
@@ -211,7 +222,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Durable by design</h2>
               <p className="mt-4 text-muted">
                 Document ingestion and chat both run as workflows on a Temporal cluster. Every activity is
-                individually retryable and checkpointed — a failed OpenAI call retries alone, without
+                individually retryable and checkpointed — a failed LLM call retries alone, without
                 re-running earlier steps or wasting API credits.
               </p>
               <ul className="mt-6 space-y-3 text-sm">
@@ -278,11 +289,26 @@ export default function Home() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Running in minutes</h2>
             <p className="mt-4 text-muted">
-              You need Docker and an OpenAI API key. That&apos;s it.
+              You need Docker and an LLM provider. Pick one and go.
             </p>
           </div>
           <div className="mx-auto mt-8 max-w-2xl">
-            <CodeBlock code={quickStart} label="Terminal" />
+            <ProviderTabs
+              tabs={[
+                {
+                  id: "openai",
+                  label: "OpenAI",
+                  code: quickStartOpenAI,
+                  codeLabel: "Terminal",
+                },
+                {
+                  id: "ollama",
+                  label: "Ollama",
+                  code: quickStartOllama,
+                  codeLabel: "Terminal",
+                },
+              ]}
+            />
           </div>
           <div className="mt-8 flex justify-center">
             <Link
