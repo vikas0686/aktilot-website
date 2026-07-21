@@ -82,13 +82,13 @@ const envVars = [
 
 export default function GettingStartedPage() {
   return (
-    <article className="prose-content mx-auto max-w-3xl">
+    <article className="prose-content max-w-none">
       <h1 className="text-3xl font-bold tracking-tight">Getting Started</h1>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         The fastest way to run Aktilot is with Docker Compose. Choose your LLM provider and go.
       </p>
 
-      <div className="mt-6">
+      <div className="mt-6 max-w-2xl">
         <ProviderTabs
           tabs={[
             {
@@ -107,7 +107,7 @@ export default function GettingStartedPage() {
         />
       </div>
 
-      <p className="mt-6 text-sm text-muted">
+      <p className="mt-6 max-w-2xl text-sm text-muted">
         That&apos;s it. Create a project, upload a PDF, create an agent, and start asking questions. The
         Temporal UI at <code className="rounded bg-surface px-1.5 py-0.5">:8233</code> lets you monitor
         document processing jobs, inspect individual pipeline steps, and retry failed uploads without
@@ -137,27 +137,27 @@ export default function GettingStartedPage() {
       </div>
 
       <h2 className="mt-12 text-xl font-bold tracking-tight">Local Development</h2>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         <strong>Prerequisites:</strong> Python 3.12+, Node 20+, Docker (for Postgres + Temporal)
       </p>
 
       <h3 className="mt-6 text-base font-semibold">Backend</h3>
-      <div className="mt-3">
+      <div className="mt-3 max-w-2xl">
         <CodeBlock code={backendSetup} label="Terminal" />
       </div>
 
       <h3 className="mt-8 text-base font-semibold">Frontend</h3>
-      <div className="mt-3">
+      <div className="mt-3 max-w-2xl">
         <CodeBlock code={frontendSetup} label="Terminal" />
       </div>
 
       <h3 className="mt-8 text-base font-semibold">Tests</h3>
-      <div className="mt-3">
+      <div className="mt-3 max-w-2xl">
         <CodeBlock code={testCommands} label="Terminal" />
       </div>
 
       <h2 className="mt-12 text-xl font-bold tracking-tight">Environment Variables</h2>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         Copy <code className="rounded bg-surface px-1.5 py-0.5">.env.example</code> to{" "}
         <code className="rounded bg-surface px-1.5 py-0.5">.env</code> in the project root (for Docker) or{" "}
         <code className="rounded bg-surface px-1.5 py-0.5">backend/.env</code> (for local dev).

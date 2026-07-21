@@ -67,9 +67,9 @@ const metricPrefixes = [
 
 export default function ObservabilityPage() {
   return (
-    <article className="prose-content mx-auto max-w-3xl">
+    <article className="prose-content max-w-none">
       <h1 className="text-3xl font-bold tracking-tight">Observability</h1>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         Aktilot ships with a full observability stack out of the box. Every component of the RAG pipeline —
         from document ingestion to LLM calls to ChromaDB queries — is instrumented with OpenTelemetry and
         visualised in Grafana. The stack starts automatically with{" "}
@@ -77,7 +77,7 @@ export default function ObservabilityPage() {
         required.
       </p>
 
-      <div className="mt-6 rounded-lg border border-border bg-surface p-5 font-mono text-xs leading-6 text-muted">
+      <div className="mt-6 max-w-2xl rounded-lg border border-border bg-surface p-5 font-mono text-xs leading-6 text-muted">
         Aktilot (API + Worker)
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;│ OTLP/gRPC
@@ -130,7 +130,7 @@ export default function ObservabilityPage() {
       </div>
 
       <h2 className="mt-12 text-xl font-bold tracking-tight">Traces</h2>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         Every API request and Temporal workflow activity is traced end to end and stored in Grafana Tempo.
         Traces link API requests → workflow executions → individual activity spans, so you can follow a single
         user query from the HTTP endpoint through every pipeline step. Open Grafana → Explore → select the
@@ -139,7 +139,7 @@ export default function ObservabilityPage() {
       </p>
 
       <h2 className="mt-12 text-xl font-bold tracking-tight">Metrics reference</h2>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         All custom metrics use the <code className="rounded bg-surface px-1.5 py-0.5">rag.*</code> prefix and
         are exported via OTLP to the collector. Temporal SDK built-in metrics use the{" "}
         <code className="rounded bg-surface px-1.5 py-0.5">temporal_*</code> prefix.

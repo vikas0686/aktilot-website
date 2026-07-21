@@ -37,9 +37,9 @@ const maturityLevels = [
 
 export default function ArchitecturePage() {
   return (
-    <article className="prose-content mx-auto max-w-3xl">
+    <article className="prose-content max-w-none">
       <h1 className="text-3xl font-bold tracking-tight">Architecture</h1>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         Aktilot ships as a Docker Compose stack: a React frontend, a FastAPI backend, a Temporal cluster for
         durable workflow execution, Postgres for metadata, and ChromaDB for vectors — plus a full
         OpenTelemetry observability stack.
@@ -56,7 +56,7 @@ export default function ArchitecturePage() {
       </div>
 
       <h2 className="mt-12 text-xl font-bold tracking-tight">Workflows on a Temporal cluster</h2>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         All three workflows run on a Temporal cluster for durable, individually-retryable execution:
       </p>
 
@@ -100,28 +100,28 @@ export default function ArchitecturePage() {
       </div>
 
       <h2 className="mt-12 text-xl font-bold tracking-tight">Retrieval pipeline</h2>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         Ingestion parses PDF (pypdf/pdfplumber), DOCX (python-docx), or plain text, cleans it, splits it into
         overlapping chunks (~1000 characters with ~200 character overlap), embeds each chunk with
         your configured embedding model,
         and writes it into ChromaDB.
       </p>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         At query time, Aktilot extracts keywords, runs dense vector search and sparse BM25 search in
         parallel, blends and reranks the results, assembles context from the top-ranked chunks, and generates
         an answer:
       </p>
-      <blockquote className="mt-4 border-l-2 border-brand-violet pl-6 text-sm italic text-muted">
+      <blockquote className="mt-4 max-w-2xl border-l-2 border-brand-violet pl-6 text-sm italic text-muted">
         final_score = (0.5 &times; vector_similarity) + (0.5 &times; keyword_match_ratio)
       </blockquote>
-      <p className="mt-3 text-sm text-muted">
+      <p className="mt-3 max-w-2xl text-sm text-muted">
         This is the simplest hybrid variant — a production system tuned further would use learned weights or
         Reciprocal Rank Fusion. Combining keyword overlap with semantic similarity consistently outperforms
         pure vector search on precise factual questions like dates, names, and figures.
       </p>
 
       <h2 className="mt-12 text-xl font-bold tracking-tight">Where Aktilot sits on the RAG maturity model</h2>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 max-w-2xl text-muted">
         Aktilot is architected to evolve toward agentic RAG without a rewrite — the service layer, tool-step
         recording, and response schema are already agent-compatible.
       </p>

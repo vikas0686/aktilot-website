@@ -22,19 +22,21 @@ export default function BlogPostPage() {
   return (
     <article>
       <div className="border-b border-border py-14">
-        <Container className="max-w-3xl">
-          <Link href="/blog" className="text-sm font-medium text-brand-violet hover:underline">
-            &larr; Back to blog
-          </Link>
-          <time className="mt-6 block text-xs font-medium uppercase tracking-wide text-muted">
-            {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-          </time>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{post.title}</h1>
+        <Container>
+          <div className="mx-auto max-w-3xl">
+            <Link href="/blog" className="text-sm font-medium text-brand-violet hover:underline">
+              &larr; Back to blog
+            </Link>
+            <time className="mt-6 block text-xs font-medium uppercase tracking-wide text-muted">
+              {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+            </time>
+            <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{post.title}</h1>
+          </div>
         </Container>
       </div>
 
-      <Container className="max-w-3xl py-14">
-        <div className="prose-content max-w-none space-y-5 text-[15px] leading-7 text-foreground/90">
+      <Container className="py-14">
+        <div className="prose-content mx-auto max-w-3xl space-y-5 text-[15px] leading-7 text-foreground/90">
           <p>
             Your API is returning 200s. Latency is nominal. CPU is fine. Uptime is 99.9%.
           </p>
