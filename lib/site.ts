@@ -65,8 +65,59 @@ export const navLinks = [
   { href: "/demo", label: "Demo" },
   { href: "/docs/architecture", label: "Architecture" },
   { href: "/docs/observability", label: "Observability" },
+  { href: "/connectors", label: "Connectors" },
   { href: "/docs/api", label: "API Reference" },
   { href: "/blog", label: "Blog" },
+] as const;
+
+export type Connector = {
+  id: "github" | "gitlab" | "jira" | "slack";
+  name: string;
+  status: "available" | "coming-soon";
+  tagline: string;
+  description: string;
+  features?: readonly string[];
+  docsHref?: string;
+};
+
+export const connectors: readonly Connector[] = [
+  {
+    id: "github",
+    name: "GitHub",
+    status: "available",
+    tagline: "Sync an entire repo — code and issues — into your project's knowledge base.",
+    description:
+      "Install a GitHub App, pick a repository, and Aktilot pulls in file contents plus every issue and its comments — indexed into the same searchable vector store as your uploaded documents, kept as a clearly separate, independently-syncable source.",
+    features: [
+      "Full repo + issues ingestion — code, docs, and issue threads (with comments) indexed side-by-side with uploads",
+      "Durable Temporal sync — GithubSyncWorkflow checkpoints every step, so a rate limit mid-sync only retries that step",
+      "Bring your own GitHub App — self-hosted, so each deployment installs its own App with read-only Contents + Issues access",
+      "Manual full re-sync — click Sync to clear old chunks and re-pull everything fresh (no webhooks in this version)",
+    ],
+    docsHref: "/blob/main/docs/GITHUB_CONNECTOR.md",
+  },
+  {
+    id: "gitlab",
+    name: "GitLab",
+    status: "coming-soon",
+    tagline: "Sync GitLab repositories and issues the same way as GitHub.",
+    description:
+      "Project and group repositories, plus issues and merge request discussions, indexed into your knowledge base.",
+  },
+  {
+    id: "jira",
+    name: "Jira",
+    status: "coming-soon",
+    tagline: "Bring your team's tickets and epics into agent context.",
+    description: "Projects, issues, and comments — searchable alongside your documents and code.",
+  },
+  {
+    id: "slack",
+    name: "Slack",
+    status: "coming-soon",
+    tagline: "Index conversations from the channels that matter.",
+    description: "Channel history and threads, so agents can answer questions your team already discussed.",
+  },
 ] as const;
 
 export const docsNav = [
